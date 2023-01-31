@@ -23,7 +23,10 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "node-geocoder": "^4.2.0",
+    "parse-kml": "^1.0.1",
     "reflect-metadata": "^0.1.13",
+    "robust-point-in-polygon": "^1.0.3",
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
