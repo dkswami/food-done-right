@@ -28,7 +28,6 @@ export class OutletService {
 			return asset.geometry.type === 'Polygon';
 		}).find((asset) => {
 			const isOutlet = classifyPoint(asset.geometry.coordinates[0], locationCoordinates)	// test coordinate [16.38717,48.20266]
-			console.log('isOutlet', isOutlet)
 			return isOutlet === -1 || isOutlet === 0
 		})
 

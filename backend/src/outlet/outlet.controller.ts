@@ -10,8 +10,8 @@ export class OutletController {
 		return this.outletService.getAll();
 	}
 
-	@Get(':address')
-	checkOutlet(@Param('address') address: string): Promise<any> {
-		return this.outletService.checkOutlet(address);
+	@Get(':location')
+	checkOutlet(@Param('location') location: string): Promise<any> {
+		return this.outletService.checkOutlet(location);
 	}
 }

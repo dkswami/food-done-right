@@ -16,7 +16,6 @@ export default function Home() {
 		e.preventDefault();
 		try {
 			const response = await axios.get(`http://localhost:4000/api/v1/outlet/${searchInput}`)
-			//console.log(response.data)
 			setOutletResult(response.data)
 		} catch (error) {
 			console.log(error)
@@ -35,7 +34,6 @@ export default function Home() {
 		const getSearch = async () => {
 			setLoading(true);
 			const response = await axios.get(`http://www.mapquestapi.com/search/v3/prediction?key=${process.env.NEXT_PUBLIC_MAPQUEST_KEY}&collection=adminArea,poi,address,category,franchise,airport&q=${debouncedSearch}`)
-			console.log(response)
 			setFetchedAddress(response.data.results);
 			setLoading(false)
 		}
@@ -51,10 +49,10 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
-				<h1 className={styles.title}>Food Done Right</h1>
+				<h1 className={styles.title}>Food Done Right</h1>				
 				<form onSubmit={handleSubmit}>
 					<input type="text" className={styles.textbox} placeholder="Search Address" onChange={handleChange} value={searchInput} />
-					<input title="Search" value="Go" type="submit" className={styles.button} />
+					<input title="Search" value="Check Outlet" type="submit" className={styles.button} />
 				</form>
 				<div className={styles.fetchedresults}>
 					{ loading && <p>Loading...</p>}
@@ -69,6 +67,10 @@ export default function Home() {
 				<div className={styles.outletresult}>
 					<h3>Outlet Info : {outletResult}</h3>
 				</div>
+				<br/>
+				<p>This app will take the address and search for it's nearest outlet within the defined polygon area(as given in assets.kml).</p>
+				<p>Tech stack used are Next js, Nest js, typescript in nest, debouncing, used mapquest for search & geoapi and more.</p>
+				<p>You can reach me at dkswami1820@gmail.com</p>
 			</main>
 		</>
 	)
