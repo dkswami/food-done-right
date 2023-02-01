@@ -8,17 +8,18 @@ export default function Home() {
 	const [fetchedAddress, setFetchedAddress] = useState([]);
 	const [searchInput, setSearchInput] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [outletResult, setOutletResult] = useState('');
 
-	const debouncedSearch = useDebounce(searchInput, 700);
+	const debouncedSearch = useDebounce(searchInput, 1000);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(searchInput)
 		try {
 			const response = await axios.get(`http://localhost:4000/api/v1/outlet/${searchInput}`)
-			console.log(response)
+			//console.log(response.data)
+			setOutletResult(response.data)
 		} catch (error) {
-			
+			console.log(error)
 		}
 	}
 
@@ -33,15 +34,13 @@ export default function Home() {
 	useEffect(() => {
 		const getSearch = async () => {
 			setLoading(true);
-			const response = await axios.get(`http://www.mapquestapi.com/search/v3/prediction?key=${process.env.NEXT_PUBLIC_MAPQUEST_KEY}&collection=address&q=${debouncedSearch}`)
+			const response = await axios.get(`http://www.mapquestapi.com/search/v3/prediction?key=${process.env.NEXT_PUBLIC_MAPQUEST_KEY}&collection=adminArea,poi,address,category,franchise,airport&q=${debouncedSearch}`)
 			console.log(response)
-			setFetchedAddress(response.results);
+			setFetchedAddress(response.data.results);
 			setLoading(false)
 		}
-		if (debouncedSearch.length>3 && debouncedSearch) {}
+		if (debouncedSearch.length>3 && debouncedSearch) getSearch();
 	}, [debouncedSearch])
-	// console.log('debounced',debouncedSearch)
-	// console.log('fetchedAddress',fetchedAddress)
 
 	return (
 		<>
@@ -66,6 +65,9 @@ export default function Home() {
 							</div>
 						)
 					})}
+				</div>
+				<div className={styles.outletresult}>
+					<h3>Outlet Info : {outletResult}</h3>
 				</div>
 			</main>
 		</>
