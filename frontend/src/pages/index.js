@@ -10,7 +10,7 @@ export default function Home() {
 	const [loading, setLoading] = useState(false);
 	const [outletResult, setOutletResult] = useState('');
 
-	const debouncedSearch = useDebounce(searchInput, 1000);
+	const debouncedSearch = useDebounce(searchInput, 2000);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
